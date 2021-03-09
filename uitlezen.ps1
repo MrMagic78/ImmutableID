@@ -18,7 +18,7 @@ switch ($option)
 ‘1’{
 write-verbose “Optie 1 geselecteerd.”
 $GetUser = Read-Host -Prompt ‘Vul de gebruikersnaam in:’
-$Users = get-aduser $GetUser | select userprincipalname,@{label=”ImmutableID”;expression={[System.Convert]::ToBase64String($_.objectguid.ToByteArray())}}
+$Users = get-aduser $GetUser | select UserPrincipalName,@{label=”ImmutableID”;expression={[System.Convert]::ToBase64String($_.objectguid.ToByteArray())}}
 $Users
 }
 
@@ -29,7 +29,7 @@ Write-host 'Vul het pad in waar de export moet komen te staan. Bijv. c:\temp\IMI
 
 $Path = Read-Host -Prompt ‘Pad’
 
-$Users = get-aduser -filter * | select userprincipalname,@{label=”ImmutableID”;expression={[System.Convert]::ToBase64String($_.objectguid.ToByteArray())}}
+$Users = get-aduser -filter * | select UserPrincipalName,@{label=”ImmutableID”;expression={[System.Convert]::ToBase64String($_.objectguid.ToByteArray())}}
 $users
 $users | export-csv $Path
 
